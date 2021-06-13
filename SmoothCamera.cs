@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using ICities;
 
 namespace SmoothCamera
 {
-    public class SmoothCamera
+    public class SmoothCamera : IUserMod
     {
+        public string Name => "Smooth Camera";
+        public string Description => "Make your camera movement more smoothly.";
     }
 }
