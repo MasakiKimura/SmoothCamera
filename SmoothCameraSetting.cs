@@ -99,7 +99,7 @@ namespace SmoothCamera
                 config.LightWeightLevelOfDetail = sel;
                 Configuration<SmoothCameraConfiguration>.Save();
             });
-
+            /*
             //  Apply at position change
             group.AddCheckbox("Apply at position change.", config.ApplyAtPositionChange, sel =>
             {
@@ -120,7 +120,7 @@ namespace SmoothCamera
                 config.ApplyAtZoomChange = sel;
                 Configuration<SmoothCameraConfiguration>.Save();
             });
-
+            */
             //  Return delay frame
             int returnDelayFrameSelectedIndex = GetSelectedOptionIndex(config.ReturnDalayFrame, IntegerValues);
             group.AddDropdown("Return delay frame (Default:15.)", IntegerLabels, returnDelayFrameSelectedIndex, sel =>

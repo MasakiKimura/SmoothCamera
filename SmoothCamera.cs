@@ -62,9 +62,18 @@ namespace SmoothCamera
 
         public override void OnUpdate(float realTimeDelta, float simulationTimeDelta)
         {
-            float threshold = 1.0f / (float)SmoothCamera.Config.ApplyThresholdFPS;
+            if (SmoothCamera.Config.ApplyThresholdFPS > 0)
+            {
+                float realFPS = 1.0f / realTimeDelta;
 
-            isSlowerThanThreshold = realTimeDelta > threshold ? true : false;
+                isSlowerThanThreshold = realFPS < (float)SmoothCamera.Config.ApplyThresholdFPS ? true : false;
+
+                UnityEngine.Debug.Log("realFPS:" + realFPS + "    threshold: " + SmoothCamera.Config.ApplyThresholdFPS);
+            }
+            else
+            {
+                isSlowerThanThreshold = true;
+            }
         }
     }
 
