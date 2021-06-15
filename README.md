@@ -13,7 +13,17 @@ SmoothCamera はカメラの移動時に動的に画質クオリティを下げ�
 このことを利用し、カメラの移動時のみ一時的に画質のクオリティを下げることで、
 画質の低下を気にすることなく、スムーズなカメラ操作を行うことが可能となります。
 
-2. どれくらい効果があるのか？
+2. インストール方法
+
+"%LOCALAPPDATA%\Colossal Order\Cities_Skylines\Addons\Mods 以下に SmoothCamera
+ディレクトリを作成し、以下のファイルを配置してください。
+
+ - 0Harmony.dll
+ - SmoothCamera.dll
+ 
+その後、Cities Skylines を起動し、コンテンツマネージャーから MOD を有効にしてください。
+
+3. どれくらい効果があるのか？
 
 マシンの性能やゲーム上の街の発展状況によって効果は異なります。
 もし、オプション画面の画質設定欄でShadow quality や Detail of object の設定を低設定にして
@@ -21,7 +31,7 @@ FPS の向上が得られるなら、この MOD による効果が期待でき�
 
 手元の環境では、後述の設定パターン A) で約 20% B) で約 50% C) で約 70% 程度の速度向上が確認できました。
 
-3. 設定項目
+4. 設定項目
 
 ・Default shadow quality
 静止状態での影のクオリティです。
@@ -43,7 +53,7 @@ FPS の向上が得られるなら、この MOD による効果が期待でき�
 静止状態で設定の FPS を上回るような状態では、移動しても低画質モードに移行しないようにします。
 Speedslider を使っている場合、FPS の計算がおかしくなるため、None を設定してください。
 
-4. 設定値のパターン
+5. 設定値のパターン
 
  A) Default shadow quality      : High
     Light weight shadow quality : High
@@ -69,7 +79,7 @@ Light weight shadow quality のみ低画質モード(影無し)にします。
 Light weight shadow quality と Light weight level of detail の両方を低画質にします。
 移動時はそれなりに画質の低下が認識されますが、かなりのFPS向上が見込まれます。
 
-5. 制限事項
+6. 制限事項
 
 他のカメラ制御系 MOD と干渉するかもしれません。
 Camera positions utility mod と共存できるようには作っています。
@@ -91,7 +101,7 @@ Harmony を使ってパッチしています。
 この関数をパッチしている他の MOD が存在していた場合、
 競合が発生します。
 
-6. 懸念事項
+7. 懸念事項
 
 Level of detail の設定が切り替わる瞬間、若干のパフォーマンスダウンが
 測定されました。手元の環境では体感できる程度ではありませんでしたが、
