@@ -68,7 +68,7 @@ namespace SmoothCamera
 
                 isSlowerThanThreshold = realFPS < (float)SmoothCamera.Config.ApplyThresholdFPS ? true : false;
 
-                UnityEngine.Debug.Log("realFPS:" + realFPS + "    threshold: " + SmoothCamera.Config.ApplyThresholdFPS);
+                //UnityEngine.Debug.Log("realFPS:" + realFPS + "    threshold: " + SmoothCamera.Config.ApplyThresholdFPS);
             }
             else
             {
@@ -103,13 +103,15 @@ namespace SmoothCamera
             }
             else
             {
-                bool isMovedPosition = m_previousPosition != ___m_targetPosition;
+                bool isMovedPosition = Vector3.Distance(m_previousPosition, ___m_targetPosition) > 0.3f;
                 bool isMovedSize = m_previousSize != ___m_targetSize;
                 bool isMovedAngle = m_previousAngle != ___m_targetAngle;
 
                 bool isMoved = (isMovedPosition && SmoothCamera.Config.ApplyAtPositionChange) 
                             || (isMovedSize && SmoothCamera.Config.ApplyAtZoomChange)
                             || (isMovedAngle && SmoothCamera.Config.ApplyAtAngleChange);
+
+                //UnityEngine.Debug.Log("___m_targetPosition: " + ___m_targetPosition + "Distance: " + Vector3.Distance(m_previousPosition, ___m_targetPosition));
 
                 bool isStartMoving = isMoved && !isMoving;
                 bool isStopMoving = !isMoved && isMoving;
@@ -148,7 +150,7 @@ namespace SmoothCamera
 #endif
                     }
 #if DEBUG
-                    //UnityEngine.Debug.Log("stop moving count: " + count);
+                    UnityEngine.Debug.Log("stop moving count: " + count);
 #endif
                 }
 

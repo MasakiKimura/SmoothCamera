@@ -22,8 +22,8 @@ namespace SmoothCamera
 
         public bool ApplyAtZoomChange  { get; set; } = true;
 
-        public int ReturnDalayFrame { get; set; } = 15;
+        public int ReturnDalayFrame { get; set; } = 5;
 
-        public int ApplyThresholdFPS { get; set; } = 30;
+        public int ApplyThresholdFPS { get; set; } = 0;
     }
 }

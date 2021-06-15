@@ -25,7 +25,7 @@ namespace SmoothCamera
 
         private static readonly string[] IntegerLabels =
         {
-            "0",
+            "Disable",
             "5",
             "10",
             "15",
@@ -123,7 +123,7 @@ namespace SmoothCamera
             */
             //  Return delay frame
             int returnDelayFrameSelectedIndex = GetSelectedOptionIndex(config.ReturnDalayFrame, IntegerValues);
-            group.AddDropdown("Return delay frame (Default:15.)", IntegerLabels, returnDelayFrameSelectedIndex, sel =>
+            group.AddDropdown("Return delay frame (Default:5)", IntegerLabels, returnDelayFrameSelectedIndex, sel =>
             {
                 // Change config value and save config
                 config.ReturnDalayFrame = IntegerValues[sel];
@@ -132,7 +132,7 @@ namespace SmoothCamera
 
             //  ApplyThresholdFPS
             int applyThreasholdFPSSelectedIndex = GetSelectedOptionIndex(config.ApplyThresholdFPS, IntegerValues);
-            group.AddDropdown("Apply threashold FPS (Default:30.)", IntegerLabels, applyThreasholdFPSSelectedIndex, sel =>
+            group.AddDropdown("Apply only when FPS is slower than this value.(Default:None) ", IntegerLabels, applyThreasholdFPSSelectedIndex, sel =>
             {
                 // Change config value and save config
                 config.ApplyThresholdFPS = IntegerValues[sel];

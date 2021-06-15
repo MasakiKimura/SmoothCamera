@@ -39,8 +39,9 @@ FPS の向上が得られるなら、この MOD による効果が期待でき�
 カメラが再び静止したときに、静止状態のクオリティに戻すまでの遅延フレームを示します。
 カメラが断続的に移動するケースにおいて、低画質と高画質が高い頻度で切り替わるのを防ぎます。
 
-・Apply threashold FPS
+・Apply only when FPS is slower than this value
 静止状態で設定の FPS を上回るような状態では、移動しても低画質モードに移行しないようにします。
+Speedslider を使っている場合、FPS の計算がおかしくなるため、None を設定してください。
 
 4. 設定値のパターン
 
@@ -73,6 +74,9 @@ Light weight shadow quality と Light weight level of detail の両方を低画�
 他のカメラ制御系 MOD と干渉するかもしれません。
 Camera positions utility mod と共存できるようには作っています。
 
+Speedslider を使っている場合、FPS の計算がおかしくなるため、
+Apply only when FPS is slower than this value の値を None を設定してください。
+
 画質設定オプション項目の、
 ・Shadow quality 
 ・Shadow distance
@@ -81,4 +85,16 @@ Camera positions utility mod と共存できるようには作っています。
 
 Ultimate level of detail の設定と競合する可能性があります。
 (全て Game defaultに設定している限りは問題ありません)
+
+内部的には CameraController.UpdateCurrentPosition を
+Harmony を使ってパッチしています。
+この関数をパッチしている他の MOD が存在していた場合、
+競合が発生します。
+
+6. 懸念事項
+
+Level of detail の設定が切り替わる瞬間、若干のパフォーマンスダウンが
+測定されました。手元の環境では体感できる程度ではありませんでしたが、
+CPU のスペックが低かったり、都市のオブジェクトが多かったりすると、
+体感できるレベルになる可能性もあります。
 
