@@ -33,23 +33,23 @@ you can expect to improve a FPS.
 
 4. Setting UI
  
-- Default shadow quality
+- Default shadow quality:
 Shadow quality when camera is stopped.
 
-- Light weight shadow quality
+- Light weight shadow quality:
 Shadow quality when camera is moving.
 
-- Default level of detail
+- Default level of detail:
 Object LOD quality when camera is stopped.
 
-- Light weight level of detail
+- Light weight level of detail:
 Object LOD quality when camera is moving.
 
-- Return delay frame
+- Return delay frame:
 The delay frame count for returning default quality.
 This prevent to switch an image quality frequently.
 
-- Apply only when FPS is slower than this value
+- Apply only when FPS is slower than this value:
 This value is a threashold to prevent to switch a low quality at the time of high FPS.
 Make sure to set 'None' if you use a speedslider MOD.
 
