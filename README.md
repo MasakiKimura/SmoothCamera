@@ -1,5 +1,110 @@
 # SmoothCamera
 
+# English
+
+1. What is SmoothCamera?
+
+SmoothCamera is the MOD which improve your game practical FPS by 
+reducing rendering quality only when a camera is moving.
+
+In general, we are tend to feel a laggy when a camera is moving,
+otherwise, we couldn't recognize image quality debasement at that time.
+
+SmoothCamera could provide you to a smooth camera operation by 
+reducing rendering quality for a temprary period of time only when 
+a moving.
+
+2. How to install?
+
+Make a "SmoothCamera" directory under 
+"%LOCALAPPDATA%\Colossal Order\Cities_Skylines\Addons\Mods
+
+Then, deploy following files.
+ - 0Harmony.dll
+ - SmoothCamera.dll
+
+And make sure to enable this mod on Contents manager.
+
+3. How efficient?
+
+Honesty, it depends on your environment. (Machine power, scale of your city, number of mod/asset)
+If your city has a margin for image quality debasement by default option setting (Shadow quality or Detail of object),
+you can expect to improve a FPS.
+
+4. Setting UI
+ 
+- Default shadow quality
+Shadow quality when camera is stopped.
+
+- Light weight shadow quality
+Shadow quality when camera is moving.
+
+- Default level of detail
+Object LOD quality when camera is stopped.
+
+- Light weight level of detail
+Object LOD quality when camera is moving.
+
+- Return delay frame
+The delay frame count for returning default quality.
+This prevent to switch an image quality frequently.
+
+- Apply only when FPS is slower than this value
+This value is a threashold to prevent to switch a low quality at the time of high FPS.
+Make sure to set 'None' if you use a speedslider MOD.
+
+5. Setting pattern
+
+ A) Default shadow quality      : High
+    Light weight shadow quality : High
+    Default level of detail     : Excellent
+    Light weight level of detail: Low
+
+Apply only 'Light weight level of detail'.
+You couldn't recognize almost image debasement, and you can get some FPS improvement.
+
+ B) Default shadow quality      : High
+    Light weight shadow quality : None
+    Default level of detail     : Excellent
+    Light weight level of detail: Excellent
+
+Apply only 'Light weight shadow quality'.
+You can recognize an image debasement, but you can get a big FPS imrovement.
+
+ C) Default shadow quality      : High
+    Light weight shadow quality : None
+    Default level of detail     : Excellent
+    Light weight level of detail: Low
+
+Apply both 'Light weight level of detail' and 'Light weight shadow quality'.
+You can also recognize an image debasement, but you can get a significant FPS imrovement.
+
+6. Limitation
+
+This mod could be an compatible issue with other camera MOD.
+I confirm 'Camera positions utility mod' has a compatible.
+
+If you use a speedslider mod, make sure to set 'None' for Apply only when FPS is slower than this value,
+because FPS calculation will be wrong.
+
+The following settings on default setting UI is overwritten by this mod.
+- Shadow quality 
+- Shadow distance
+- Object detail
+
+There is a possibility to have an any issue with 'Ultimate level of detail' mod.
+Set all parameters to 'Game default'
+
+This mod patches CameraController.UpdateCurrentPosition function by using Harmony library.
+So if other mod also patches this function, this mod couldn't work toghter.
+
+7. Concerning point
+
+I found some FPS down at the twinkling of Level of detail switching.
+Although it is a slightly on my environment, you might aware it if you use a 
+low spec CPU or your city has a large amout of objects.
+
+
 # Japanese
 
 1. SmoothCamera とは？
