@@ -1,5 +1,7 @@
 # SmoothCamera
 
+日本語の解説は後半にあります。
+
 # English
 
 1. What is SmoothCamera?
@@ -17,7 +19,9 @@ a moving.
 2. How to install?
 
 Make a "SmoothCamera" directory under 
+```言語:タイトル
 "%LOCALAPPDATA%\Colossal Order\Cities_Skylines\Addons\Mods
+```
 
 Then, deploy following files.
  - 0Harmony.dll
@@ -34,53 +38,63 @@ you can expect to improve a FPS.
 4. Setting UI
  
 - Default shadow quality:
-Shadow quality when camera is stopped.
+  - Shadow quality when camera is stopped.
 
 - Light weight shadow quality:
-Shadow quality when camera is moving.
+  - Shadow quality when camera is moving.
 
 - Default level of detail:
-Object LOD quality when camera is stopped.
+  - Object LOD quality when camera is stopped.
 
 - Light weight level of detail:
-Object LOD quality when camera is moving.
+  - Object LOD quality when camera is moving.
 
 - Return delay frame:
-The delay frame count for returning default quality.
-This prevent to switch an image quality frequently.
+  - The delay frame count for returning default quality.
+  - This prevent to switch an image quality frequently.
 
 - Apply only when FPS is slower than this value:
-This value is a threashold to prevent to switch a low quality at the time of high FPS.
-Make sure to set 'None' if you use a speedslider MOD.
+  - This value is a threashold to prevent to switch a low quality at the time of high FPS.
+  - Make sure to set 'None' if you use a speedslider MOD.
 
 - Don't apply when a FreeCamera mode is enabled:
-If you want to apply at free camera mode, check it.
+  - If you want to apply at free camera mode, check it.
 
 5. Setting pattern
 
- A) Default shadow quality      : High
-    Light weight shadow quality : High
-    Default level of detail     : Excellent
-    Light weight level of detail: Low
+### Pattern A
+| Setting | Value |
+|:-:|:-:|
+|Default shadow quality|High|
+|Light weight shadow quality|High|
+|Default level of detail|Excellent|
+|Light weight level of detail|Low|
 
 Apply only 'Light weight level of detail'.
 You couldn't recognize almost image debasement, and you can get some FPS improvement.
 
- B) Default shadow quality      : High
-    Light weight shadow quality : None
-    Default level of detail     : Excellent
-    Light weight level of detail: Excellent
+### Pattern B
+| Setting | Value |
+|:-:|:-:|
+|Default shadow quality|High|
+|Light weight shadow quality|None|
+|Default level of detail|Excellent|
+|Light weight level of detail|Excellent|
 
 Apply only 'Light weight shadow quality'.
 You can recognize an image debasement, but you can get a big FPS imrovement.
 
- C) Default shadow quality      : High
-    Light weight shadow quality : None
-    Default level of detail     : Excellent
-    Light weight level of detail: Low
+### Pattern C
+| Setting | Value |
+|:-:|:-:|
+|Default shadow quality|High|
+|Light weight shadow quality|None|
+|Default level of detail|Excellent|
+|Light weight level of detail|Low|
 
 Apply both 'Light weight level of detail' and 'Light weight shadow quality'.
 You can also recognize an image debasement, but you can get a significant FPS imrovement.
+
 
 6. Limitation
 
@@ -108,7 +122,7 @@ Although it is a slightly on my environment, you might aware it if you use a
 low spec CPU or your city has a large amout of objects.
 
 
-# Japanese
+## Japanese
 
 1. SmoothCamera とは？
 
@@ -122,8 +136,10 @@ SmoothCamera はカメラの移動時に動的に画質クオリティを下げ�
 画質の低下を気にすることなく、スムーズなカメラ操作を行うことが可能となります。
 
 2. インストール方法
-
-"%LOCALAPPDATA%\Colossal Order\Cities_Skylines\Addons\Mods 以下に SmoothCamera
+```言語:タイトル
+"%LOCALAPPDATA%\Colossal Order\Cities_Skylines\Addons\Mods
+```
+以下に SmoothCamera
 ディレクトリを作成し、以下のファイルを配置してください。
 
  - 0Harmony.dll
@@ -141,51 +157,60 @@ FPS の向上が得られるなら、この MOD による効果が期待でき�
 
 4. 設定項目
 
-・Default shadow quality
-静止状態での影のクオリティです。
+- Default shadow quality
+  - 静止状態での影のクオリティです。
 
-・Light weight shadow quality
-カメラ移動時の影のクオリティです。通常、Default shadow quality よりも低い値を設定します。
+- Light weight shadow quality
+  - カメラ移動時の影のクオリティです。通常、Default shadow quality よりも低い値を設定します。
 
-・Default level of detail
-静止状態でのオブジェクトのクオリティです。
+- Default level of detail
+  - 静止状態でのオブジェクトのクオリティです。
 
-・Light weight level of detail
-カメラ移動時のオブジェクトのクオリティです。通常、Default level of detail よりも低い値を設定します。
+- Light weight level of detail
+  - カメラ移動時のオブジェクトのクオリティです。通常、Default level of detail よりも低い値を設定します。
 
-・Return delay frame
-カメラが再び静止したときに、静止状態のクオリティに戻すまでの遅延フレームを示します。
-カメラが断続的に移動するケースにおいて、低画質と高画質が高い頻度で切り替わるのを防ぎます。
+- Return delay frame
+  - カメラが再び静止したときに、静止状態のクオリティに戻すまでの遅延フレームを示します。
+  - カメラが断続的に移動するケースにおいて、低画質と高画質が高い頻度で切り替わるのを防ぎます。
 
-・Apply only when FPS is slower than this value
-静止状態で設定の FPS を上回るような状態では、移動しても低画質モードに移行しないようにします。
-Speedslider を使っている場合、FPS の計算がおかしくなるため、None を設定してください。
+- Apply only when FPS is slower than this value
+  - 静止状態で設定の FPS を上回るような状態では、移動しても低画質モードに移行しないようにします。
+  - Speedslider を使っている場合、FPS の計算がおかしくなるため、None を設定してください。
 
-・ Don't apply when a FreeCamera mode is enabled:
-Free camera モードでこの機能を無効にした場合はチェックを入れてください。
+- Don't apply when a FreeCamera mode is enabled:
+  - Free camera モードでこの機能を無効にした場合はチェックを入れてください。
 
 5. 設定値のパターン
 
- A) Default shadow quality      : High
-    Light weight shadow quality : High
-    Default level of detail     : Excellent
-    Light weight level of detail: Low
+### Pattern A
+| Setting | Value |
+|:-:|:-:|
+|Default shadow quality|High|
+|Light weight shadow quality|High|
+|Default level of detail|Excellent|
+|Light weight level of detail|Low|
 
 Light weight level of detail のみ低画質モードにします。
 移動時の画質の変化はあまり気にならない程度で、ある程度のFPS向上が見込まれます。
 
- B) Default shadow quality      : High
-    Light weight shadow quality : None
-    Default level of detail     : Excellent
-    Light weight level of detail: Excellent
+### Pattern B
+| Setting | Value |
+|:-:|:-:|
+|Default shadow quality|High|
+|Light weight shadow quality|None|
+|Default level of detail|Excellent|
+|Light weight level of detail|Excellent|
 
 Light weight shadow quality のみ低画質モード(影無し)にします。
 移動時はそれなりに画質の低下が認識されますが、結構なFPS向上が見込まれます。
 
- C) Default shadow quality      : High
-    Light weight shadow quality : None
-    Default level of detail     : Excellent
-    Light weight level of detail: Low
+### Pattern C
+| Setting | Value |
+|:-:|:-:|
+|Default shadow quality|High|
+|Light weight shadow quality|None|
+|Default level of detail|Excellent|
+|Light weight level of detail|Low|
 
 Light weight shadow quality と Light weight level of detail の両方を低画質にします。
 移動時はそれなりに画質の低下が認識されますが、かなりのFPS向上が見込まれます。
