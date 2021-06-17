@@ -16,6 +16,9 @@ SmoothCamera could provide you to a smooth camera operation by
 reducing rendering quality for a temprary period of time only when 
 a moving.
 
+Introduction movie: [https://www.youtube.com/watch?v=pDkcILze7oA](https://www.youtube.com/watch?v=pDkcILze7oA)
+
+
 2. How to install?
 
 Make a "SmoothCamera" directory under 
@@ -134,6 +137,8 @@ SmoothCamera はカメラの移動時に動的に画質クオリティを下げ�
 
 このことを利用し、カメラの移動時のみ一時的に画質のクオリティを下げることで、
 画質の低下を気にすることなく、スムーズなカメラ操作を行うことが可能となります。
+
+紹介動画: [https://www.youtube.com/watch?v=pDkcILze7oA](https://www.youtube.com/watch?v=pDkcILze7oA)
 
 2. インストール方法
 ```言語:タイトル
