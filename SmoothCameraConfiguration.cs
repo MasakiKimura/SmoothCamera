@@ -25,5 +25,7 @@ namespace SmoothCamera
         public int ReturnDalayFrame { get; set; } = 5;
 
         public int ApplyThresholdFPS { get; set; } = 0;
+
+        public bool DontApplyWhenFreeCamera { get; set; } = true;
     }
 }

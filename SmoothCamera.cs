@@ -67,8 +67,6 @@ namespace SmoothCamera
                 float realFPS = 1.0f / realTimeDelta;
 
                 isSlowerThanThreshold = realFPS < (float)SmoothCamera.Config.ApplyThresholdFPS ? true : false;
-
-                //UnityEngine.Debug.Log("realFPS:" + realFPS + "    threshold: " + SmoothCamera.Config.ApplyThresholdFPS);
             }
             else
             {
@@ -92,7 +90,8 @@ namespace SmoothCamera
                                     ref ColossalFramework.SavedInt ___m_ShadowsDistance,
                                     Vector3 ___m_targetPosition,
                                     float ___m_targetSize,
-                                    Vector2 ___m_targetAngle)
+                                    Vector2 ___m_targetAngle,
+                                    bool ___m_freeCamera)
         {
             if (isFirst)
             {
@@ -111,12 +110,12 @@ namespace SmoothCamera
                             || (isMovedSize && SmoothCamera.Config.ApplyAtZoomChange)
                             || (isMovedAngle && SmoothCamera.Config.ApplyAtAngleChange);
 
-                //UnityEngine.Debug.Log("___m_targetPosition: " + ___m_targetPosition + "Distance: " + Vector3.Distance(m_previousPosition, ___m_targetPosition));
-
                 bool isStartMoving = isMoved && !isMoving;
                 bool isStopMoving = !isMoved && isMoving;
 
-                if (isStartMoving && KeyInputThreading.isSlowerThanThreshold)
+                bool isFreeCameraLimitation = ___m_freeCamera && SmoothCamera.Config.DontApplyWhenFreeCamera;
+
+                if (isStartMoving && KeyInputThreading.isSlowerThanThreshold && !isFreeCameraLimitation)
                 {
                     ___m_ShadowsQuality.value = SmoothCamera.Config.LightWeightShadowQuality;
                     ___m_ShadowsDistance.value = SmoothCamera.Config.LightWeightShadowQuality;
@@ -128,7 +127,7 @@ namespace SmoothCamera
 #endif
                 }
 
-                if (isStopMoving || count != 0)
+                if ((isStopMoving || count != 0))
                 {
                     if (count++ > SmoothCamera.Config.ReturnDalayFrame)
                     {

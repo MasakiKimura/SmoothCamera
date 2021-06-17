@@ -138,6 +138,13 @@ namespace SmoothCamera
                 config.ApplyThresholdFPS = IntegerValues[sel];
                 Configuration<SmoothCameraConfiguration>.Save();
             });
+
+            //  Dont apply when FreeCamera
+            group.AddCheckbox("Don't apply when a FreeCamera mode is enabled.", config.DontApplyWhenFreeCamera, sel =>
+            {
+                config.DontApplyWhenFreeCamera = sel;
+                Configuration<SmoothCameraConfiguration>.Save();
+            });
         }
 
         private static int GetSelectedOptionIndex(int value, int[] optionValues)
