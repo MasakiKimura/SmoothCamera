@@ -53,6 +53,9 @@ This prevent to switch an image quality frequently.
 This value is a threashold to prevent to switch a low quality at the time of high FPS.
 Make sure to set 'None' if you use a speedslider MOD.
 
+- Don't apply when a FreeCamera mode is enabled:
+If you want to apply at free camera mode, check it.
+
 5. Setting pattern
 
  A) Default shadow quality      : High
@@ -157,6 +160,9 @@ FPS の向上が得られるなら、この MOD による効果が期待でき�
 ・Apply only when FPS is slower than this value
 静止状態で設定の FPS を上回るような状態では、移動しても低画質モードに移行しないようにします。
 Speedslider を使っている場合、FPS の計算がおかしくなるため、None を設定してください。
+
+・ Don't apply when a FreeCamera mode is enabled:
+Free camera モードでこの機能を無効にした場合はチェックを入れてください。
 
 5. 設定値のパターン
 
