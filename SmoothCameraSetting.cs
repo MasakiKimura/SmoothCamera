@@ -62,7 +62,7 @@ namespace SmoothCamera
             // Load the configuration
             SmoothCameraConfiguration config = Configuration<SmoothCameraConfiguration>.Load();
 
-            var group = helper.AddGroup("Ultimate Level Of Detail");
+            var group = helper.AddGroup("Smooth Camera");
 
             // Default shadow quality 
             int defaultShadowQualitySelectedIndex = config.DefaultShadowQuality;
@@ -132,7 +132,7 @@ namespace SmoothCamera
 
             //  ApplyThresholdFPS
             int applyThreasholdFPSSelectedIndex = GetSelectedOptionIndex(config.ApplyThresholdFPS, IntegerValues);
-            group.AddDropdown("Apply only when FPS is slower than this value.(Default:None) ", IntegerLabels, applyThreasholdFPSSelectedIndex, sel =>
+            group.AddDropdown("Apply only when FPS is slower than this value.(Default:Disable) ", IntegerLabels, applyThreasholdFPSSelectedIndex, sel =>
             {
                 // Change config value and save config
                 config.ApplyThresholdFPS = IntegerValues[sel];
