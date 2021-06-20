@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Reflection;
 using ICities;
 using Harmony;
 using UnityEngine;
+using ColossalFramework.UI;
 
 namespace SmoothCamera
 {
@@ -12,6 +14,10 @@ namespace SmoothCamera
 
         private const string HarmonyId = "MSKGaming.SmoothCamera";
         private HarmonyInstance _harmony;
+
+        public const float Version = 2.00f;
+        public static string VersionString = String.Format("Ver. {0:F}", Version);
+        public static bool IsNeedToResetSetting = false;
 
         public static SmoothCameraConfiguration Config;
 
@@ -27,6 +33,11 @@ namespace SmoothCamera
 #endif
 
             Config = Configuration<SmoothCameraConfiguration>.Load();
+
+            if (SmoothCamera.Config.VersionInfo < 2.00f && SmoothCameraSetting.HasChangedFromDefault())
+            {
+                IsNeedToResetSetting = true;
+            }
         }
 
         public void OnDisabled()
@@ -37,7 +48,7 @@ namespace SmoothCamera
             _harmony = null;
         }
 
-        public void OnSettingsUI(UIHelperBase helper) => SmoothCameraSetting.OnSettingsUI(helper);
+        public void OnSettingsUI(UIHelperBase helper) => SmoothCameraSetting.OnSettingsUI(helper, SmoothCamera.VersionString);
 
 
     }
@@ -53,6 +64,16 @@ namespace SmoothCamera
         {
             base.OnLevelLoaded(mode);
 
+            if (SmoothCamera.IsNeedToResetSetting)
+            {
+                // create dialog panel
+                ExceptionPanel panel = UIView.library.ShowModal<ExceptionPanel>("ExceptionPanel");
+
+                // display a message for the user in the panel
+                panel.SetMessage("Smooth Camera :" + SmoothCamera.VersionString, "Smooth Camera is updated. Your setting has been back to default. Please adjust it again.", false);
+            }
+
+ 
         }
     }
 
@@ -75,6 +96,35 @@ namespace SmoothCamera
         }
     }
 
+    [HarmonyPatch(typeof(RenderManager.CameraInfo), "CheckRenderDistance")]
+    public static class RenderManagerCameraInfoCheckRenderDistancePatch
+    {
+        public static void Prefix(ref float maxDistance)
+        {
+
+            if (CameraControllerUpdateCurrentPositionPatch.ObjectLOD == 0)
+            {
+                maxDistance = 200.0f;
+                
+            }
+            else if (CameraControllerUpdateCurrentPositionPatch.ObjectLOD == 1)
+            {
+                maxDistance = 300.0f;
+            }
+            else if (CameraControllerUpdateCurrentPositionPatch.ObjectLOD == 2)
+            {
+                maxDistance = 400.0f;
+            }
+            else if (CameraControllerUpdateCurrentPositionPatch.ObjectLOD == 3)
+            {
+                // Do nothing
+            }
+
+            
+
+        }
+
+    }
 
     [HarmonyPatch(typeof(CameraController), "UpdateCurrentPosition")]
     public static class CameraControllerUpdateCurrentPositionPatch
@@ -85,6 +135,8 @@ namespace SmoothCamera
         private static bool isFirst = true;
         private static bool isMoving = false;
         private static uint count = 0;
+
+        public static int ObjectLOD = 3;
 
         public static void Postfix(ref ColossalFramework.SavedInt ___m_ShadowsQuality,
                                     ref ColossalFramework.SavedInt ___m_ShadowsDistance,
@@ -119,7 +171,7 @@ namespace SmoothCamera
                 {
                     ___m_ShadowsQuality.value = SmoothCamera.Config.LightWeightShadowQuality;
                     ___m_ShadowsDistance.value = SmoothCamera.Config.LightWeightShadowQuality;
-                    RenderManager.LevelOfDetail = SmoothCamera.Config.LightWeightLevelOfDetail;
+                    ObjectLOD = SmoothCamera.Config.LightWeightLevelOfDetail;
 
                     count = 0;
 #if DEBUG
@@ -137,10 +189,8 @@ namespace SmoothCamera
                             ___m_ShadowsDistance.value = SmoothCamera.Config.DefaultShadowQuality;
                         }
 
-                        if (RenderManager.LevelOfDetail != SmoothCamera.Config.DefaultLevelOfDetail)
-                        {
-                            RenderManager.LevelOfDetail = SmoothCamera.Config.DefaultLevelOfDetail;
-                        }
+                        ObjectLOD = SmoothCamera.Config.DefaultLevelOfDetail;
+
 
                         count = 0;
 
@@ -161,4 +211,5 @@ namespace SmoothCamera
             }
         }
     }
+
 }

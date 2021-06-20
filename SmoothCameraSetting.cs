@@ -57,12 +57,17 @@ namespace SmoothCamera
             60,
         };
 
-        public static void OnSettingsUI(UIHelperBase helper)
+        public static void OnSettingsUI(UIHelperBase helper, String versionString)
         {
+            if (SmoothCamera.IsNeedToResetSetting)
+            {
+                SetDefaultValues();
+            }
+
             // Load the configuration
             SmoothCameraConfiguration config = Configuration<SmoothCameraConfiguration>.Load();
 
-            var group = helper.AddGroup("Smooth Camera");
+            var group = helper.AddGroup("Smooth Camera " + versionString);
 
             // Default shadow quality 
             int defaultShadowQualitySelectedIndex = config.DefaultShadowQuality;
@@ -145,6 +150,42 @@ namespace SmoothCamera
                 config.DontApplyWhenFreeCamera = sel;
                 Configuration<SmoothCameraConfiguration>.Save();
             });
+        }
+
+        public static void SetDefaultValues()
+        {
+            SmoothCameraConfiguration config = Configuration<SmoothCameraConfiguration>.Load();
+
+            config.DefaultShadowQuality = SmoothCameraConfiguration.DefaultShadowQuality_DefaultValue;
+            config.LightWeightShadowQuality = SmoothCameraConfiguration.LightWeightShadowQuality_DefaultValue;
+            config.DefaultLevelOfDetail = SmoothCameraConfiguration.DefaultLevelOfDetail_DefaultValue;
+            config.LightWeightLevelOfDetail = SmoothCameraConfiguration.LightWeightLevelOfDetail_DefaultValue;
+            config.ApplyAtPositionChange = SmoothCameraConfiguration.ApplyAtPositionChange_DefaultValue;
+            config.ApplyAtAngleChange = SmoothCameraConfiguration.ApplyAtAngleChange_DefaultValue;
+            config.ApplyAtZoomChange = SmoothCameraConfiguration.ApplyAtZoomChange_DefaultValue;
+            config.ReturnDalayFrame = SmoothCameraConfiguration.ReturnDalayFrame_DefaultValue;
+            config.ApplyThresholdFPS = SmoothCameraConfiguration.ApplyThresholdFPS_DefaultValue;
+            config.DontApplyWhenFreeCamera = SmoothCameraConfiguration.DontApplyWhenFreeCamera_DefaultValue;
+            config.VersionInfo = SmoothCameraConfiguration.VersionInfo_DefaultValue;
+            Configuration<SmoothCameraConfiguration>.Save();
+        }
+
+        public static bool HasChangedFromDefault()
+        {
+            SmoothCameraConfiguration config = Configuration<SmoothCameraConfiguration>.Load();
+
+            bool sameAsDefault = config.DefaultShadowQuality == SmoothCameraConfiguration.DefaultShadowQuality_DefaultValue
+                && config.LightWeightShadowQuality == SmoothCameraConfiguration.LightWeightShadowQuality_DefaultValue
+                && config.DefaultLevelOfDetail == SmoothCameraConfiguration.DefaultLevelOfDetail_DefaultValue
+                && config.LightWeightLevelOfDetail == SmoothCameraConfiguration.LightWeightLevelOfDetail_DefaultValue
+                && config.ApplyAtPositionChange == SmoothCameraConfiguration.ApplyAtPositionChange_DefaultValue
+                && config.ApplyAtAngleChange == SmoothCameraConfiguration.ApplyAtAngleChange_DefaultValue
+                && config.ApplyAtZoomChange == SmoothCameraConfiguration.ApplyAtZoomChange_DefaultValue
+                && config.ReturnDalayFrame == SmoothCameraConfiguration.ReturnDalayFrame_DefaultValue
+                && config.ApplyThresholdFPS == SmoothCameraConfiguration.ApplyThresholdFPS_DefaultValue
+                && config.DontApplyWhenFreeCamera == SmoothCameraConfiguration.DontApplyWhenFreeCamera_DefaultValue;
+
+            return !sameAsDefault;
         }
 
         private static int GetSelectedOptionIndex(int value, int[] optionValues)
