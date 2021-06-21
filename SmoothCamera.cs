@@ -160,6 +160,9 @@ namespace SmoothCamera
         private static bool isFirst = true;
         private static bool isMoving = false;
         private static uint count = 0;
+        private static int m_shadowQualityDefaultValue;
+        private static int m_shadowDistanceDefaultValue;
+
 
         public static int ObjectLOD = 3;
 
@@ -176,6 +179,8 @@ namespace SmoothCamera
                 m_previousSize = ___m_targetSize;
                 m_previousAngle = ___m_targetAngle;
                 isFirst = false;
+                m_shadowQualityDefaultValue = ___m_ShadowsQuality.value;
+                m_shadowDistanceDefaultValue = ___m_ShadowsDistance.value;
             }
             else
             {
@@ -183,9 +188,7 @@ namespace SmoothCamera
                 bool isMovedSize = m_previousSize != ___m_targetSize;
                 bool isMovedAngle = m_previousAngle != ___m_targetAngle;
 
-                bool isMoved = (isMovedPosition && SmoothCamera.Config.ApplyAtPositionChange) 
-                            || (isMovedSize && SmoothCamera.Config.ApplyAtZoomChange)
-                            || (isMovedAngle && SmoothCamera.Config.ApplyAtAngleChange);
+                bool isMoved = isMovedPosition || isMovedSize || isMovedAngle;
 
                 bool isStartMoving = isMoved && !isMoving;
                 bool isStopMoving = !isMoved && isMoving;
@@ -194,13 +197,18 @@ namespace SmoothCamera
 
                 if (isStartMoving && KeyInputThreading.isSlowerThanThreshold && !isFreeCameraLimitation && KeyInputThreading.enabledByKeyToggle)
                 {
+                    if (count == 0)
+                    {
+                        m_shadowQualityDefaultValue = ___m_ShadowsQuality.value;
+                        m_shadowDistanceDefaultValue = ___m_ShadowsDistance.value;
+                    }
                     ___m_ShadowsQuality.value = SmoothCamera.Config.LightWeightShadowQuality;
                     ___m_ShadowsDistance.value = SmoothCamera.Config.LightWeightShadowQuality;
                     ObjectLOD = SmoothCamera.Config.LightWeightLevelOfDetail;
 
                     count = 0;
 #if DEBUG
-                    UnityEngine.Debug.Log("Change quality: shadow:" + ___m_ShadowsQuality.value + " lod:" + RenderManager.LevelOfDetail);
+                    UnityEngine.Debug.Log("Change quality: shadow:" + ___m_ShadowsQuality.value + " lod:" + ObjectLOD);
 #endif
                 }
 
@@ -208,19 +216,15 @@ namespace SmoothCamera
                 {
                     if (count++ > SmoothCamera.Config.ReturnDalayFrame)
                     {
-                        if (___m_ShadowsQuality.value != SmoothCamera.Config.DefaultShadowQuality)
-                        {
-                            ___m_ShadowsQuality.value = SmoothCamera.Config.DefaultShadowQuality;
-                            ___m_ShadowsDistance.value = SmoothCamera.Config.DefaultShadowQuality;
-                        }
+                        ___m_ShadowsQuality.value = m_shadowQualityDefaultValue;
+                        ___m_ShadowsDistance.value = m_shadowDistanceDefaultValue;
 
-                        ObjectLOD = SmoothCamera.Config.DefaultLevelOfDetail;
-
+                        ObjectLOD = SmoothCameraConfiguration.DefaultLevelOfDetail_DefaultValue;
 
                         count = 0;
 
 #if DEBUG
-                    UnityEngine.Debug.Log("Change quality: shadow:" + ___m_ShadowsQuality.value + " lod:" + RenderManager.LevelOfDetail);
+                    UnityEngine.Debug.Log("Change quality: shadow:" + ___m_ShadowsQuality.value + " lod:" + ObjectLOD);
 #endif
                     }
 #if DEBUG

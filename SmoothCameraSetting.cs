@@ -79,30 +79,12 @@ namespace SmoothCamera
 
             var group = helper.AddGroup("Smooth Camera " + versionString);
 
-            // Default shadow quality 
-            int defaultShadowQualitySelectedIndex = config.DefaultShadowQuality;
-            group.AddDropdown("Default shadow quality", ShadowQualityLabels, defaultShadowQualitySelectedIndex, sel =>
-            {
-                // Change config value and save config
-                config.DefaultShadowQuality = sel;
-                Configuration<SmoothCameraConfiguration>.Save();
-            });
-
             //  Light weight shadow quality
             int lightWeightShadowQualitySelectedIndex = config.LightWeightShadowQuality;
             group.AddDropdown("Light weight shadow quality", ShadowQualityLabels, lightWeightShadowQualitySelectedIndex, sel =>
             {
                 // Change config value and save config
                 config.LightWeightShadowQuality = sel;
-                Configuration<SmoothCameraConfiguration>.Save();
-            });
-
-            //  Default level of detail
-            int defaultLevelOfDetailSelectedIndex = config.DefaultLevelOfDetail;
-            group.AddDropdown("Default level of detail", LevelOfDetailLabels, defaultLevelOfDetailSelectedIndex, sel =>
-            {
-                // Change config value and save config
-                config.DefaultLevelOfDetail = sel;
                 Configuration<SmoothCameraConfiguration>.Save();
             });
 
@@ -114,28 +96,7 @@ namespace SmoothCamera
                 config.LightWeightLevelOfDetail = sel;
                 Configuration<SmoothCameraConfiguration>.Save();
             });
-            /*
-            //  Apply at position change
-            group.AddCheckbox("Apply at position change.", config.ApplyAtPositionChange, sel =>
-            {
-                config.ApplyAtPositionChange = sel;
-                Configuration<SmoothCameraConfiguration>.Save();
-            });
 
-            //  Apply at angle change
-            group.AddCheckbox("Apply at angle change.", config.ApplyAtAngleChange, sel =>
-            {
-                config.ApplyAtAngleChange = sel;
-                Configuration<SmoothCameraConfiguration>.Save();
-            });
-
-            //  Apply at zoom change
-            group.AddCheckbox("Apply at zoom change.", config.ApplyAtZoomChange, sel =>
-            {
-                config.ApplyAtZoomChange = sel;
-                Configuration<SmoothCameraConfiguration>.Save();
-            });
-            */
             //  Return delay frame
             int returnDelayFrameSelectedIndex = GetSelectedOptionIndex(config.ReturnDalayFrame, IntegerValues);
             group.AddDropdown("Return delay frame (Default:5)", IntegerLabels, returnDelayFrameSelectedIndex, sel =>
@@ -175,13 +136,8 @@ namespace SmoothCamera
         {
             SmoothCameraConfiguration config = Configuration<SmoothCameraConfiguration>.Load();
 
-            config.DefaultShadowQuality = SmoothCameraConfiguration.DefaultShadowQuality_DefaultValue;
             config.LightWeightShadowQuality = SmoothCameraConfiguration.LightWeightShadowQuality_DefaultValue;
-            config.DefaultLevelOfDetail = SmoothCameraConfiguration.DefaultLevelOfDetail_DefaultValue;
             config.LightWeightLevelOfDetail = SmoothCameraConfiguration.LightWeightLevelOfDetail_DefaultValue;
-            config.ApplyAtPositionChange = SmoothCameraConfiguration.ApplyAtPositionChange_DefaultValue;
-            config.ApplyAtAngleChange = SmoothCameraConfiguration.ApplyAtAngleChange_DefaultValue;
-            config.ApplyAtZoomChange = SmoothCameraConfiguration.ApplyAtZoomChange_DefaultValue;
             config.ReturnDalayFrame = SmoothCameraConfiguration.ReturnDalayFrame_DefaultValue;
             config.ApplyThresholdFPS = SmoothCameraConfiguration.ApplyThresholdFPS_DefaultValue;
             config.DontApplyWhenFreeCamera = SmoothCameraConfiguration.DontApplyWhenFreeCamera_DefaultValue;
@@ -194,13 +150,8 @@ namespace SmoothCamera
         {
             SmoothCameraConfiguration config = Configuration<SmoothCameraConfiguration>.Load();
 
-            bool sameAsDefault = config.DefaultShadowQuality == SmoothCameraConfiguration.DefaultShadowQuality_DefaultValue
-                && config.LightWeightShadowQuality == SmoothCameraConfiguration.LightWeightShadowQuality_DefaultValue
-                && config.DefaultLevelOfDetail == SmoothCameraConfiguration.DefaultLevelOfDetail_DefaultValue
+            bool sameAsDefault = config.LightWeightShadowQuality == SmoothCameraConfiguration.LightWeightShadowQuality_DefaultValue
                 && config.LightWeightLevelOfDetail == SmoothCameraConfiguration.LightWeightLevelOfDetail_DefaultValue
-                && config.ApplyAtPositionChange == SmoothCameraConfiguration.ApplyAtPositionChange_DefaultValue
-                && config.ApplyAtAngleChange == SmoothCameraConfiguration.ApplyAtAngleChange_DefaultValue
-                && config.ApplyAtZoomChange == SmoothCameraConfiguration.ApplyAtZoomChange_DefaultValue
                 && config.ReturnDalayFrame == SmoothCameraConfiguration.ReturnDalayFrame_DefaultValue
                 && config.ApplyThresholdFPS == SmoothCameraConfiguration.ApplyThresholdFPS_DefaultValue
                 && config.DontApplyWhenFreeCamera == SmoothCameraConfiguration.DontApplyWhenFreeCamera_DefaultValue
