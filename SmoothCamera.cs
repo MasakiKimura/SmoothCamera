@@ -79,22 +79,10 @@ namespace SmoothCamera
 
     public class KeyInputThreading : ThreadingExtensionBase
     {
-        public static bool isSlowerThanThreshold = false;
         public static bool enabledByKeyToggle = true;
 
         public override void OnUpdate(float realTimeDelta, float simulationTimeDelta)
         {
-            if (SmoothCamera.Config.ApplyThresholdFPS > 0)
-            {
-                float realFPS = 1.0f / realTimeDelta;
-
-                isSlowerThanThreshold = realFPS < (float)SmoothCamera.Config.ApplyThresholdFPS ? true : false;
-            }
-            else
-            {
-                isSlowerThanThreshold = true;
-            }
-
             if (toggleKeyCode())
             {
                 enabledByKeyToggle = !enabledByKeyToggle;
@@ -195,7 +183,7 @@ namespace SmoothCamera
 
                 bool isFreeCameraLimitation = ___m_freeCamera && SmoothCamera.Config.DontApplyWhenFreeCamera;
 
-                if (isStartMoving && KeyInputThreading.isSlowerThanThreshold && !isFreeCameraLimitation && KeyInputThreading.enabledByKeyToggle)
+                if (isStartMoving && !isFreeCameraLimitation && KeyInputThreading.enabledByKeyToggle)
                 {
                     if (count == 0)
                     {

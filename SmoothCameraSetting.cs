@@ -106,15 +106,6 @@ namespace SmoothCamera
                 Configuration<SmoothCameraConfiguration>.Save();
             });
 
-            //  ApplyThresholdFPS
-            int applyThreasholdFPSSelectedIndex = GetSelectedOptionIndex(config.ApplyThresholdFPS, IntegerValues);
-            group.AddDropdown("Apply only when FPS is slower than this value.(Default:Disable) ", IntegerLabels, applyThreasholdFPSSelectedIndex, sel =>
-            {
-                // Change config value and save config
-                config.ApplyThresholdFPS = IntegerValues[sel];
-                Configuration<SmoothCameraConfiguration>.Save();
-            });
-
             int toggleKeyCodeIndex = config.ToggleKeyCode;
             group.AddDropdown("ToggleKeyCode.(Default:Ctrl + G) ", ToggleKeyCode, toggleKeyCodeIndex, sel =>
             {
@@ -139,7 +130,6 @@ namespace SmoothCamera
             config.LightWeightShadowQuality = SmoothCameraConfiguration.LightWeightShadowQuality_DefaultValue;
             config.LightWeightLevelOfDetail = SmoothCameraConfiguration.LightWeightLevelOfDetail_DefaultValue;
             config.ReturnDalayFrame = SmoothCameraConfiguration.ReturnDalayFrame_DefaultValue;
-            config.ApplyThresholdFPS = SmoothCameraConfiguration.ApplyThresholdFPS_DefaultValue;
             config.DontApplyWhenFreeCamera = SmoothCameraConfiguration.DontApplyWhenFreeCamera_DefaultValue;
             config.ToggleKeyCode = SmoothCameraConfiguration.ToggleKeyCode_DefaultValue;
             config.VersionInfo = SmoothCameraConfiguration.VersionInfo_DefaultValue;
@@ -153,7 +143,6 @@ namespace SmoothCamera
             bool sameAsDefault = config.LightWeightShadowQuality == SmoothCameraConfiguration.LightWeightShadowQuality_DefaultValue
                 && config.LightWeightLevelOfDetail == SmoothCameraConfiguration.LightWeightLevelOfDetail_DefaultValue
                 && config.ReturnDalayFrame == SmoothCameraConfiguration.ReturnDalayFrame_DefaultValue
-                && config.ApplyThresholdFPS == SmoothCameraConfiguration.ApplyThresholdFPS_DefaultValue
                 && config.DontApplyWhenFreeCamera == SmoothCameraConfiguration.DontApplyWhenFreeCamera_DefaultValue
                 && config.ToggleKeyCode == SmoothCameraConfiguration.ToggleKeyCode_DefaultValue;
 
