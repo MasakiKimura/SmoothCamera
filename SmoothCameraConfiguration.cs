@@ -18,6 +18,7 @@ namespace SmoothCamera
         public const int ReturnDalayFrame_DefaultValue = 5;
         public const int ApplyThresholdFPS_DefaultValue = 0;
         public const bool DontApplyWhenFreeCamera_DefaultValue = true;
+        public const int ToggleKeyCode_DefaultValue = 2;
         public const float VersionInfo_DefaultValue = SmoothCamera.Version;
 
         public int DefaultShadowQuality { get; set; } = DefaultShadowQuality_DefaultValue;
@@ -39,6 +40,8 @@ namespace SmoothCamera
         public int ApplyThresholdFPS { get; set; } = ApplyThresholdFPS_DefaultValue;
 
         public bool DontApplyWhenFreeCamera { get; set; } = DontApplyWhenFreeCamera_DefaultValue;
+
+        public int ToggleKeyCode { get; set; } = ToggleKeyCode_DefaultValue;
 
         public float VersionInfo { get; set; } = 1.00f;
     }

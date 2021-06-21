@@ -80,6 +80,7 @@ namespace SmoothCamera
     public class KeyInputThreading : ThreadingExtensionBase
     {
         public static bool isSlowerThanThreshold = false;
+        public static bool enabledByKeyToggle = true;
 
         public override void OnUpdate(float realTimeDelta, float simulationTimeDelta)
         {
@@ -93,7 +94,35 @@ namespace SmoothCamera
             {
                 isSlowerThanThreshold = true;
             }
+
+            if (toggleKeyCode())
+            {
+                enabledByKeyToggle = !enabledByKeyToggle;
+                UnityEngine.Debug.Log("Key Toggle changed: " + enabledByKeyToggle);
+            }
         }
+
+        private bool toggleKeyCode()
+        {
+            switch(SmoothCamera.Config.ToggleKeyCode)
+            {
+                case 0:
+                    return false;
+                case 1:
+                    return Input.GetKeyUp(KeyCode.G);
+                case 2:
+                    return ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKeyUp(KeyCode.G));
+                case 3:
+                    return ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && Input.GetKeyUp(KeyCode.G));
+                case 4:
+                    return ((Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt)) && Input.GetKeyUp(KeyCode.G));
+                case 5:
+                    return ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && Input.GetKeyUp(KeyCode.G));
+                default:
+                    return false;
+            }
+        }
+
     }
 
     [HarmonyPatch(typeof(RenderManager.CameraInfo), "CheckRenderDistance")]
@@ -105,7 +134,6 @@ namespace SmoothCamera
             if (CameraControllerUpdateCurrentPositionPatch.ObjectLOD == 0)
             {
                 maxDistance = 200.0f;
-                
             }
             else if (CameraControllerUpdateCurrentPositionPatch.ObjectLOD == 1)
             {
@@ -119,9 +147,6 @@ namespace SmoothCamera
             {
                 // Do nothing
             }
-
-            
-
         }
 
     }
@@ -167,7 +192,7 @@ namespace SmoothCamera
 
                 bool isFreeCameraLimitation = ___m_freeCamera && SmoothCamera.Config.DontApplyWhenFreeCamera;
 
-                if (isStartMoving && KeyInputThreading.isSlowerThanThreshold && !isFreeCameraLimitation)
+                if (isStartMoving && KeyInputThreading.isSlowerThanThreshold && !isFreeCameraLimitation && KeyInputThreading.enabledByKeyToggle)
                 {
                     ___m_ShadowsQuality.value = SmoothCamera.Config.LightWeightShadowQuality;
                     ___m_ShadowsDistance.value = SmoothCamera.Config.LightWeightShadowQuality;

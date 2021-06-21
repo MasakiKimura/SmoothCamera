@@ -57,6 +57,16 @@ namespace SmoothCamera
             60,
         };
 
+        private static readonly string[] ToggleKeyCode =
+        {
+            "Disable",
+            "G",
+            "Ctrl + G",
+            "Shift + G",
+            "Alt + G",
+            "Ctrl + Shift + G",
+        };
+
         public static void OnSettingsUI(UIHelperBase helper, String versionString)
         {
             if (SmoothCamera.IsNeedToResetSetting)
@@ -144,12 +154,21 @@ namespace SmoothCamera
                 Configuration<SmoothCameraConfiguration>.Save();
             });
 
+            int toggleKeyCodeIndex = config.ToggleKeyCode;
+            group.AddDropdown("ToggleKeyCode.(Default:Ctrl + G) ", ToggleKeyCode, toggleKeyCodeIndex, sel =>
+            {
+                // Change config value and save config
+                config.ToggleKeyCode = sel;
+                Configuration<SmoothCameraConfiguration>.Save();
+            });
+
             //  Dont apply when FreeCamera
             group.AddCheckbox("Don't apply when a FreeCamera mode is enabled.", config.DontApplyWhenFreeCamera, sel =>
             {
                 config.DontApplyWhenFreeCamera = sel;
                 Configuration<SmoothCameraConfiguration>.Save();
             });
+
         }
 
         public static void SetDefaultValues()
@@ -166,6 +185,7 @@ namespace SmoothCamera
             config.ReturnDalayFrame = SmoothCameraConfiguration.ReturnDalayFrame_DefaultValue;
             config.ApplyThresholdFPS = SmoothCameraConfiguration.ApplyThresholdFPS_DefaultValue;
             config.DontApplyWhenFreeCamera = SmoothCameraConfiguration.DontApplyWhenFreeCamera_DefaultValue;
+            config.ToggleKeyCode = SmoothCameraConfiguration.ToggleKeyCode_DefaultValue;
             config.VersionInfo = SmoothCameraConfiguration.VersionInfo_DefaultValue;
             Configuration<SmoothCameraConfiguration>.Save();
         }
@@ -183,7 +203,8 @@ namespace SmoothCamera
                 && config.ApplyAtZoomChange == SmoothCameraConfiguration.ApplyAtZoomChange_DefaultValue
                 && config.ReturnDalayFrame == SmoothCameraConfiguration.ReturnDalayFrame_DefaultValue
                 && config.ApplyThresholdFPS == SmoothCameraConfiguration.ApplyThresholdFPS_DefaultValue
-                && config.DontApplyWhenFreeCamera == SmoothCameraConfiguration.DontApplyWhenFreeCamera_DefaultValue;
+                && config.DontApplyWhenFreeCamera == SmoothCameraConfiguration.DontApplyWhenFreeCamera_DefaultValue
+                && config.ToggleKeyCode == SmoothCameraConfiguration.ToggleKeyCode_DefaultValue;
 
             return !sameAsDefault;
         }
