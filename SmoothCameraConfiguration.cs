@@ -11,7 +11,7 @@ namespace SmoothCamera
         public const int LightWeightShadowQuality_DefaultValue = 3;
         public const int DefaultLevelOfDetail_DefaultValue = 3;
         public const int LightWeightLevelOfDetail_DefaultValue = 1;
-        public const int ReturnDalayFrame_DefaultValue = 5;
+        public const int ReturnDalayFrame_DefaultValue = 0;
         public const bool DontApplyWhenFreeCamera_DefaultValue = true;
         public const int ToggleKeyCode_DefaultValue = 2;
         public const float VersionInfo_DefaultValue = SmoothCamera.Version;

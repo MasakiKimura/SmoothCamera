@@ -25,7 +25,7 @@ namespace SmoothCamera
 
         private static readonly string[] IntegerLabels =
         {
-            "Disable",
+            "0",
             "5",
             "10",
             "15",
@@ -99,7 +99,7 @@ namespace SmoothCamera
 
             //  Return delay frame
             int returnDelayFrameSelectedIndex = GetSelectedOptionIndex(config.ReturnDalayFrame, IntegerValues);
-            group.AddDropdown("Return delay frame (Default:5)", IntegerLabels, returnDelayFrameSelectedIndex, sel =>
+            group.AddDropdown("Return delay frame (Default:0)", IntegerLabels, returnDelayFrameSelectedIndex, sel =>
             {
                 // Change config value and save config
                 config.ReturnDalayFrame = IntegerValues[sel];
