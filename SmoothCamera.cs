@@ -86,7 +86,9 @@ namespace SmoothCamera
             if (toggleKeyCode())
             {
                 enabledByKeyToggle = !enabledByKeyToggle;
+#if DEBUG
                 UnityEngine.Debug.Log("Key Toggle changed: " + enabledByKeyToggle);
+#endif
             }
         }
 
